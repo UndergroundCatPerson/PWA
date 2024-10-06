@@ -1,0 +1,50 @@
+﻿@page "/register"
+<link href="css/register.css" rel="stylesheet" />
+
+
+<div class="content-container">
+    <div class="register-section">
+        <h2>Register</h2>
+        <EditForm Model="@registerModel" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div>
+                <label>Email</label>
+                <InputText @bind-Value="registerModel.Email" class="form-input" placeholder="Type your email" />
+            </div>
+            <div>
+                <label>Password</label>
+                <InputText @bind-Value="registerModel.Password" type="password" class="form-input" placeholder="Type your password" />
+            </div>
+            <div>
+                <label>Confirm Password</label>
+                <InputText @bind-Value="registerModel.confirmPassword" type="password" class="form-input" placeholder="Retype your password" />
+            </div>
+
+
+            <button type="submit" class="signup-button">Sign Up</button>
+        </EditForm>
+    </div>
+
+
+</div>
+
+
+
+@code {
+    private RegisterModel registerModel = new RegisterModel();
+
+    private void HandleValidSubmit()
+    {
+        // Handle form submission logic here
+        Console.WriteLine($"Registering in {registerModel.Email}");
+    }
+
+    public class RegisterModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string confirmPassword { get; set; } //Might not be needed?
+    }
+}

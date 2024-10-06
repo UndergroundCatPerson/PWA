@@ -1,0 +1,67 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager
+<link href="css/login.css" rel="stylesheet" /> @*there is non *@
+
+
+<div class="content-container">
+    <div class="login-section">
+        <div class="logo-title-container">
+            <img src="/Images/logo.png" alt="Logo" class="navbar-logo">
+            <h2>Login</h2>
+        </div>
+
+        <EditForm Model="@loginModel" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div>
+                <label>Email</label>
+                <InputText @bind-Value="loginModel.Email" class="form-input" placeholder="Type your email" />
+            </div>
+            <div>
+                <label>Password</label>
+                <InputText @bind-Value="loginModel.Password" type="password" class="form-input" placeholder="Type your password" />
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="remember-me" />
+                <label for="remember-me">Remember this device</label>
+            </div>
+            <br />
+            <div class="links">
+                <a href="/forgot-password">Forgot Password? Click Here!</a>
+                <a href="/resend-confirmation">Resend email confirmation</a>
+            </div>
+            <br />
+           @*  <button type="submit" class="login-button">Log In</button>
+ *@
+            <button type="button" class="login-button" onclick="location.href='/home'">Log In</button>
+
+        </EditForm>
+    </div>
+
+</div>
+
+
+
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+
+    private void HandleValidSubmit()
+    {
+        // Handle form submission logic here
+        Console.WriteLine($"Logging in {loginModel.Email}");
+
+
+         NavigationManager.NavigateTo("/home");
+    }
+
+    public class LoginModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+
+
+
+}
